@@ -1,8 +1,8 @@
-﻿namespace AzureDevelopent.ToDoList.Domain.Owners
+﻿namespace AzureDevelopment.ToDoList.Domain.Entity
 {
     public enum State
     {
-        ToDo = 0, 
+        ToDo = 0,
         InProgress = 1,
         Done = 2
     }

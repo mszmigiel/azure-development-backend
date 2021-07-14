@@ -1,4 +1,5 @@
-﻿using AzureDevelopent.ToDoList.Domain.Owners;
+﻿using AzureDevelopment.ToDoList.Domain.Entity;
+using AzureDevelopment.ToDoList.Infrastructure.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,9 +17,15 @@ namespace AzureDevelopment.ToDoList.Infrastructure
         public DbSet<Owner> Owners { get; set; }
         public DbSet<TaskEntry> Tasks { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new TaskEntryConfiguration());
+        }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ToDoList"));
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("ToDoList"), b => b.MigrationsAssembly("AzureDevelopment.ToDoList.Api"));
+        }
     }
 }
