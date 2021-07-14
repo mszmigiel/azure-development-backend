@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace AzureDevelopment.ToDoList.Domain.Repository
 {
-    public interface IOwnerRepository
+    public interface ITaskRepository
     {
-        IAsyncEnumerable<Owner> Get();
-        Task<Owner> Get(int id);
-        Task Save(OwnerDto owner);
+        IAsyncEnumerable<TaskEntry> Get();
+        Task<TaskEntry> Get(int id);
+        Task Save(TaskDto owner);
     }
 }

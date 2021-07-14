@@ -22,6 +22,7 @@ namespace AzureDevelopment.ToDoList
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddDbContext<ToDoListDbContext>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IOwnerRepository, OwnerRepository>();
         }
 

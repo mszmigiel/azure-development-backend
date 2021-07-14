@@ -15,7 +15,7 @@ namespace AzureDevelopment.ToDoList.Infrastructure.Repository
             this.dbContext = dbContext;
         }
 
-        public async IAsyncEnumerable<Owner> All()
+        public async IAsyncEnumerable<Owner> Get()
         {
             var owners = dbContext.Owners.AsAsyncEnumerable();
 

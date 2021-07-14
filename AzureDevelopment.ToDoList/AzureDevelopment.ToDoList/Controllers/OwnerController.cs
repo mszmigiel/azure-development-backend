@@ -12,7 +12,7 @@ namespace AzureDevelopment.ToDoList.Api.Controllers
     public class OwnerController : ControllerBase
     {
         [HttpGet]
-        public IAsyncEnumerable<Owner> Get([FromServices] IOwnerRepository ownerRepository) => ownerRepository.All();
+        public IAsyncEnumerable<Owner> Get([FromServices] IOwnerRepository ownerRepository) => ownerRepository.Get();
 
         [HttpGet("{id}")]
         public async Task<Owner> GetById(int id, [FromServices] IOwnerRepository ownerRepository) => await ownerRepository.Get(id);
