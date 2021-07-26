@@ -7,7 +7,7 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "OWNERS",
+                name: "Owners",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -17,7 +17,7 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OWNER", x => x.Id);
+                    table.PrimaryKey("PK_Owners", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -34,9 +34,9 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
                 {
                     table.PrimaryKey("PK_TASKS", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TASKS_OWNERS_OwnerId",
+                        name: "FK_TASKS_Owners_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "OWNERS",
+                        principalTable: "Owners",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -53,7 +53,7 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
                 name: "TASKS");
 
             migrationBuilder.DropTable(
-                name: "OWNERS");
+                name: "Owners");
         }
     }
 }

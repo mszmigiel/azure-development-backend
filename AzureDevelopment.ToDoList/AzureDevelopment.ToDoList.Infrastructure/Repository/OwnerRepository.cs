@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AzureDevelopment.ToDoList.Domain.Dto;
 using AzureDevelopment.ToDoList.Domain.Entity;
 using AzureDevelopment.ToDoList.Domain.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace AzureDevelopment.ToDoList.Infrastructure.Repository
 {
@@ -15,22 +17,29 @@ namespace AzureDevelopment.ToDoList.Infrastructure.Repository
             this.dbContext = dbContext;
         }
 
-        public async IAsyncEnumerable<Owner> Get()
+        public IAsyncEnumerable<OwnerDto> Get()
         {
-            var owners = dbContext.Owners.AsAsyncEnumerable();
-
-            await foreach (var owner in owners)
-            {
-                yield return owner;
-            }
+            return dbContext.Owners
+                .Select(x => new OwnerDto(x))
+                .AsAsyncEnumerable();
         }
 
-        public async Task<Owner> Get(int id)
+        public async Task<OwnerDto> Get(int id)
         {
-            return await dbContext.FindAsync<Owner>(id);
+            return new OwnerDto(await dbContext
+                .Owners.Include(x => x.Tasks)
+                .FirstAsync(x => x.Id == id));
         }
 
-        public async Task Save(OwnerDto owner)
+        public IAsyncEnumerable<TaskEntryDto> GetTasks(int id)
+        {
+            return dbContext.Tasks
+                .Where(x => x.OwnerId == id)
+                .Select(x => new TaskEntryDto(x))
+                .AsAsyncEnumerable();
+        }
+
+        public async Task Save(OwnerRequest owner)
         {
             await dbContext.AddAsync(owner.ToEntity());
             await dbContext.SaveChangesAsync();

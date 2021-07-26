@@ -12,12 +12,15 @@ namespace AzureDevelopment.ToDoList.Api.Controllers
     public class OwnerController : ControllerBase
     {
         [HttpGet]
-        public IAsyncEnumerable<Owner> Get([FromServices] IOwnerRepository ownerRepository) => ownerRepository.Get();
+        public IAsyncEnumerable<OwnerDto> Get([FromServices] IOwnerRepository ownerRepository) => ownerRepository.Get();
 
         [HttpGet("{id}")]
-        public async Task<Owner> GetById(int id, [FromServices] IOwnerRepository ownerRepository) => await ownerRepository.Get(id);
+        public async Task<OwnerDto> GetById(int id, [FromServices] IOwnerRepository ownerRepository) => await ownerRepository.Get(id);
+
+        [HttpGet("{id}/tasks")]
+        public IAsyncEnumerable<TaskEntryDto> OwnerTasks(int id, [FromServices] IOwnerRepository ownerRepository) => ownerRepository.GetTasks(id);
 
         [HttpPost]
-        public async Task Owner([FromBody] OwnerDto owner, [FromServices] IOwnerRepository ownerRepository) => await ownerRepository.Save(owner);
+        public async Task Owner([FromBody] OwnerRequest owner, [FromServices] IOwnerRepository ownerRepository) => await ownerRepository.Save(owner);
     }
 }

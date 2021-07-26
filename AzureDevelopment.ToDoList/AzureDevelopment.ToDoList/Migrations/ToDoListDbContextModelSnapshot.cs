@@ -19,7 +19,7 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AzureDevelopent.ToDoList.Domain.Owners.Owner", b =>
+            modelBuilder.Entity("AzureDevelopment.ToDoList.Domain.Entity.Owner", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,13 +32,12 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id")
-                        .HasName("PK_OWNER");
+                    b.HasKey("Id");
 
-                    b.ToTable("OWNERS");
+                    b.ToTable("Owners");
                 });
 
-            modelBuilder.Entity("AzureDevelopent.ToDoList.Domain.Owners.TaskEntry", b =>
+            modelBuilder.Entity("AzureDevelopment.ToDoList.Domain.Entity.TaskEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,16 +61,16 @@ namespace AzureDevelopment.ToDoList.Api.Migrations
                     b.ToTable("TASKS");
                 });
 
-            modelBuilder.Entity("AzureDevelopent.ToDoList.Domain.Owners.TaskEntry", b =>
+            modelBuilder.Entity("AzureDevelopment.ToDoList.Domain.Entity.TaskEntry", b =>
                 {
-                    b.HasOne("AzureDevelopent.ToDoList.Domain.Owners.Owner", "Owner")
+                    b.HasOne("AzureDevelopment.ToDoList.Domain.Entity.Owner", "Owner")
                         .WithMany("Tasks")
                         .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("AzureDevelopent.ToDoList.Domain.Owners.Owner", b =>
+            modelBuilder.Entity("AzureDevelopment.ToDoList.Domain.Entity.Owner", b =>
                 {
                     b.Navigation("Tasks");
                 });

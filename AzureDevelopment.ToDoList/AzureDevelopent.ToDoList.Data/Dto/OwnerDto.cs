@@ -2,18 +2,17 @@
 
 namespace AzureDevelopment.ToDoList.Domain.Dto
 {
-    public class OwnerDto
+    public record OwnerDto
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string Surname { get; private set; }
 
-        public Owner ToEntity()
+        public OwnerDto(Owner owner)
         {
-            return new Owner
-            {
-                Name = Name,
-                Surname = Surname
-            };
+            Id = owner.Id;
+            Name = owner.Name;
+            Surname = owner.Surname;
         }
     }
 }

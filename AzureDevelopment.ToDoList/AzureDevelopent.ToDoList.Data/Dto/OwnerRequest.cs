@@ -2,16 +2,17 @@
 
 namespace AzureDevelopment.ToDoList.Domain.Dto
 {
-    public class TaskDto
+    public class OwnerRequest
     {
         public string Name { get; set; }
+        public string Surname { get; set; }
 
-        public TaskEntry ToEntity()
+        public Owner ToEntity()
         {
-            return new TaskEntry
+            return new Owner
             {
                 Name = Name,
-                State = State.ToDo
+                Surname = Surname
             };
         }
     }

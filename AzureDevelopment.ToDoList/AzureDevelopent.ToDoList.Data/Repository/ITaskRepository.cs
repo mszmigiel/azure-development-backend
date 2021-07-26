@@ -7,8 +7,9 @@ namespace AzureDevelopment.ToDoList.Domain.Repository
 {
     public interface ITaskRepository
     {
-        IAsyncEnumerable<TaskEntry> Get();
-        Task<TaskEntry> Get(int id);
-        Task Save(TaskDto owner);
+        IAsyncEnumerable<TaskWithOwnerEntryDto> Get();
+        Task<TaskWithOwnerEntryDto> Get(int id);
+        Task Save(TaskEntryRequest owner);
+        Task SetOwner(int id, int ownerId);
     }
 }
